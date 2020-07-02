@@ -15,7 +15,6 @@ def home():
 	if form.validate_on_submit():
 		redirect_url = url_for('text', book=form.book.data, seed=form.seed.data)
 		return redirect(redirect_url)
-	#print(form.errors)
 	return render_template('search.html', form=form)
 	
 
@@ -23,7 +22,6 @@ def home():
 def text():
 	r = request.args
 	api_url = 'http://localhost:8080/generate-text?book='+r['book']+'&seed='+r['seed']
-	#api_url = 'http://localhost:8080/generate-text?book='+book+'&seed='+seed
 	print('Got url:',api_url)
 	info = requests.get(api_url)
 	info = unicodedata.normalize('NFKD', info.text).encode('ascii','ignore')
